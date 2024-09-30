@@ -32,6 +32,21 @@ public class SIstemaDeTrocaItens {
         jogadores.add(novoJogador);
         System.out.println("O jogador foi cadastrado com sucesso!");
     }
+    private static void login(Scanner scanner){
+        System.out.println("Digite seu email: ");
+        String email = scanner.nextLine();
+        System.out.println("Digite seu PIN: ");
+        String pin = scanner.nextLine();
+
+        for(Jogador j : jogadores){
+            if(j.getEmail().equals(email) && j.getPin().equals(pin)){
+                jogadorLogado = j;
+                System.out.println("O Login foi realizado com sucesso!");
+                return;
+            }
+        }
+        System.out.println("O Email ou PIN digitados estão incorretos.");
+    }
 
 
 
