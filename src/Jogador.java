@@ -3,10 +3,10 @@ import java.util.ArrayList;
 public class Jogador {
     private String email;
     private String nomeCompleto;
-    private int pin;
+    private String pin;
     private ArrayList<Item> itens;
 
-    public Jogador(String email, String nomeCompleto, int pin){
+    public Jogador(String email, String nomeCompleto, String pin){
         this.email = email;
         this.nomeCompleto = nomeCompleto;
         this.pin = pin;
@@ -17,7 +17,7 @@ public class Jogador {
         return email;
     }
 
-    public int getPin() {
+    public String getPin() {
         return pin;
     }
 
