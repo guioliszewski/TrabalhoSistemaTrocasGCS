@@ -9,9 +9,31 @@ public class SIstemaDeTrocaItens {
     public static void main(String args[]){
         Scanner scanner = new Scanner(System.in);
         preencherDados();
+        int opcao = -1;
+        while(opcao!=0){
+            System.out.println("0: Sair do programa");
+            System.out.println("1: Cadastrar um novo Jogador");
+            System.out.println("2: Fazer Login");
+            System.out.println("3: Listar Itens do Jogador Logado");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
 
+            switch (opcao){
+                case 0:
+                    System.out.println("Finalizando o programa...");
+                    return;
+                case 1:
+                    cadastrarJogador(scanner);
+                    break;
+                case 2:
+                    login(scanner);
+                    break;
+                case 3:
+                    listarItensJogadorLogado();
+                    break;
 
-
+            }
+        }
     }
 
 
