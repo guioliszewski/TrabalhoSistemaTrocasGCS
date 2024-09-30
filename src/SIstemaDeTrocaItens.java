@@ -47,13 +47,13 @@ public class SIstemaDeTrocaItens {
         }
         System.out.println("O Email ou PIN digitados estão incorretos.");
     }
-
-
-
-
-
-
-
+    private static void listarItensJogadorLogado(){
+        if(jogadorLogado==null){
+            System.out.println("Nenhum jogador está logado no momento.");
+            return;
+        }
+        jogadorLogado.listarItensOrdenados();
+    }
     private static void preencherDados(){
         Jogador jogador1 = new Jogador("jogador1@gmail.com","Cristiano Ronaldo","111222");
         jogador1.addItem(new Item("Espada da Lua Sombria","Espada Grande","Arma",700.0));
