@@ -9,7 +9,7 @@ public class Jogador {
     public Jogador(String email, String nomeCompleto, String pin){
         this.email = email;
         this.nomeCompleto = nomeCompleto;
-        this.pin = pin;
+        this.pin = pin; //pin
         this.itens = new ArrayList<>();
     }
 
