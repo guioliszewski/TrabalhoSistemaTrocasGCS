@@ -31,12 +31,21 @@ public class SIstemaDeTrocaItens {
                 case 3:
                     listarItensJogadorLogado();
                     break;
-
+                case 4 
+                    pesquisaItem(scanner);
             }
         }
     }
 
-
+    private static void pesquisaItem(Scanner scanner){
+        System.out.println("Insira o nome do item: ");
+        String nome = scanner.nextLine();
+        System.out.println("Agora insira a descrição dele: ");
+        System.out.println("Por fim, digite qual o tipo do item: ");
+        String tipo = scanner.nextLine();
+        
+        for()
+    }
 
     private static void cadastrarJogador(Scanner scanner){
         System.out.println("Email: ");
