@@ -43,6 +43,34 @@ public class SIstemaDeTrocaItens {
     }
 
     private static void pesquisaItem(Scanner scanner){
+    private static void listarItensOutrosJogadoresPorPreco() {
+        if (jogadorLogado == null) {
+            System.out.println("Nenhum jogador está logado no momento.");
+            return;
+        }
+
+        for (Jogador jogador : jogadores) {
+            if (!jogador.equals(jogadorLogado)) {
+
+                ArrayList<Item> itens = jogador.getItens();
+
+                for (int i = 0; i < itens.size() - 1; i++) {
+                    for (int j = i + 1; j < itens.size(); j++) {
+                        if (itens.get(i).getValor() > itens.get(j).getValor()) {
+                            Item temp = itens.get(i);
+                            itens.set(i, itens.get(j));
+                            itens.set(j, temp);
+                        }
+                    }
+                }
+
+                System.out.println("Itens do jogador " + jogador.getNome() + " ordenados por preço:");
+                for (Item item : itens) {
+                    System.out.println(item);
+                }
+            }
+        }
+    }
         System.out.println("Insira o nome do item: ");
         String nome = scanner.nextLine();
         System.out.println("Agora insira a descrição dele: ");
