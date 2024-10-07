@@ -33,6 +33,10 @@ public class SIstemaDeTrocaItens {
                     break;
                 case 4:
                     pesquisaItem(scanner);
+                    break;
+                case 5:
+                    listarItensOutrosJogadoresPorPreco();
+                    break;
             }
         }
     }
