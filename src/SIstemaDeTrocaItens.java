@@ -31,7 +31,7 @@ public class SIstemaDeTrocaItens {
                 case 3:
                     listarItensJogadorLogado();
                     break;
-                case 4 
+                case 4:
                     pesquisaItem(scanner);
             }
         }
