@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 
+
 public class PropostaDeTroca {
 	private Jogador jogadorPropoe;
 	private Jogador jogadorRecebe;
@@ -38,7 +39,7 @@ public class PropostaDeTroca {
 	}
 	
 	public boolean isAceita() {
-		return Aceita;
+		return aceita;
 	}
 
 	public void aceitar() {
@@ -50,7 +51,7 @@ public class PropostaDeTroca {
 	}
 	
 	public String toString() {
-		return "Proposta: " + jogadorPropoe.getNome() + " propõe a troca do item " + itemPropoe.getItemProposto() + " pelo item " + itemRecebido.getItemRecebido() + " do jogador " jogadorRecebe.getJogadorRecebe();
+		return "Proposta: " + this.getNome() + " propõe a troca do item " + this.getItemProposto() + " pelo item " + this.getItemRecebido() + " do jogador " +this.getJogadorRecebe();
 	}
 }
 
