@@ -21,6 +21,10 @@ public class Jogador {
         return pin;
     }
 
+    public String getNome(){
+        return nomeCompleto;
+    }
+
     public ArrayList<Item> getItens() {
         return itens;
     }
