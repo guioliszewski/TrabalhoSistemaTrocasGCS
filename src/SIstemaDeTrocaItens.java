@@ -10,12 +10,16 @@ public class SIstemaDeTrocaItens {
         Scanner scanner = new Scanner(System.in);
         preencherDados();
         int opcao = -1;
-        while(opcao!=0){
+        while(opcao != 0){
             System.out.println("0: Sair do programa");
             System.out.println("1: Cadastrar um novo Jogador");
             System.out.println("2: Fazer Login");
             System.out.println("3: Listar Itens do Jogador Logado");
+            System.out.println("4: Pesquisar Item");
             System.out.println("5: Listar Itens de Jogadores por Preço");
+            System.out.println("6: Criar proposta de troca");
+            System.out.println("7: Checar propostas recebidas");
+            
             opcao = scanner.nextInt();
             scanner.nextLine();
 
@@ -38,11 +42,41 @@ public class SIstemaDeTrocaItens {
                 case 5:
                     listarItensOutrosJogadoresPorPreco();
                     break;
+                case 6:
+                    criarPropostaDeTroca(scanner);
+                    break;
+                case 7:
+                    checarPropostasRecebidas(scanner);
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
             }
         }
     }
 
     private static void pesquisaItem(Scanner scanner){
+        if (jogadorLogado == null) {
+            System.out.println("Nenhum jogador está logado no momento.");
+            return;
+        }
+
+        System.out.println("Insira o nome do item: ");
+        String nome = scanner.nextLine();
+        
+        boolean itemEncontrado = false;
+        for (Item item : jogadorLogado.getItens()) {
+            if (item.getNome().equalsIgnoreCase(nome)) {
+                System.out.println("Item encontrado: " + item);
+                itemEncontrado = true;
+            }
+        }
+
+        if (!itemEncontrado) {
+            System.out.println("Item não encontrado.");
+        }
+    }
+
     private static void listarItensOutrosJogadoresPorPreco() {
         if (jogadorLogado == null) {
             System.out.println("Nenhum jogador está logado no momento.");
@@ -51,18 +85,9 @@ public class SIstemaDeTrocaItens {
 
         for (Jogador jogador : jogadores) {
             if (!jogador.equals(jogadorLogado)) {
-
                 ArrayList<Item> itens = jogador.getItens();
 
-                for (int i = 0; i < itens.size() - 1; i++) {
-                    for (int j = i + 1; j < itens.size(); j++) {
-                        if (itens.get(i).getValor() > itens.get(j).getValor()) {
-                            Item temp = itens.get(i);
-                            itens.set(i, itens.get(j));
-                            itens.set(j, temp);
-                        }
-                    }
-                }
+                itens.sort((item1, item2) -> Double.compare(item1.getValor(), item2.getValor()));
 
                 System.out.println("Itens do jogador " + jogador.getNome() + " ordenados por preço:");
                 for (Item item : itens) {
@@ -70,14 +95,6 @@ public class SIstemaDeTrocaItens {
                 }
             }
         }
-    }
-        System.out.println("Insira o nome do item: ");
-        String nome = scanner.nextLine();
-        System.out.println("Agora insira a descrição dele: ");
-        System.out.println("Por fim, digite qual o tipo do item: ");
-        String tipo = scanner.nextLine();
-        
-        for()
     }
 
     private static void cadastrarJogador(Scanner scanner){
@@ -88,14 +105,15 @@ public class SIstemaDeTrocaItens {
         System.out.println("Digite o PIN (6 dígitos):");
         String pin = scanner.nextLine();
 
-        if(pin.length()!=6){
+        if(pin.length() != 6){
             System.out.println("ERRO. O PIN deve possuir 6 dígitos");
             return;
         }
-        Jogador novoJogador = new Jogador(email,nome,pin);
+        Jogador novoJogador = new Jogador(email, nome, pin);
         jogadores.add(novoJogador);
         System.out.println("O jogador foi cadastrado com sucesso!");
     }
+
     private static void login(Scanner scanner){
         System.out.println("Digite seu email: ");
         String email = scanner.nextLine();
@@ -111,29 +129,150 @@ public class SIstemaDeTrocaItens {
         }
         System.out.println("O Email ou PIN digitados estão incorretos.");
     }
+
     private static void listarItensJogadorLogado(){
-        if(jogadorLogado==null){
+        if(jogadorLogado == null){
             System.out.println("Nenhum jogador está logado no momento.");
             return;
         }
         jogadorLogado.listarItensOrdenados();
     }
+
+    private static void criarPropostaDeTroca(Scanner scanner) {
+        if (jogadorLogado == null) {
+            System.out.println("Nenhum jogador está logado no momento.");
+            return;
+        }
+
+        System.out.println("Digite o nome do jogador com quem deseja propor a troca: ");
+        String nomeJogadorRecebe = scanner.nextLine();
+        Jogador jogadorRecebe = null;
+
+        for (Jogador jogador : jogadores) {
+            if (jogador.getNome().equalsIgnoreCase(nomeJogadorRecebe)) {
+                jogadorRecebe = jogador;
+                break;
+            }
+        }
+
+        if (jogadorRecebe == null) {
+            System.out.println("Jogador não encontrado.");
+            return;
+        }
+
+        System.out.println("Escolha um item seu para oferecer na troca:");
+        listarItensJogadorLogado();
+        System.out.println("Digite o nome do item:");
+        String nomeItemProposto = scanner.nextLine();
+        Item itemProposto = null;
+
+        for (Item item : jogadorLogado.getItens()) {
+            if (item.getNome().equalsIgnoreCase(nomeItemProposto)) {
+                itemProposto = item;
+                break;
+            }
+        }
+
+        if (itemProposto == null) {
+            System.out.println("Item não encontrado.");
+            return;
+        }
+
+        System.out.println("Escolha o item que deseja receber:");
+        for (Item item : jogadorRecebe.getItens()) {
+            System.out.println(item);
+        }
+        System.out.println("Digite o nome do item:");
+        String nomeItemRecebido = scanner.nextLine();
+        Item itemRecebido = null;
+
+        for (Item item : jogadorRecebe.getItens()) {
+            if (item.getNome().equalsIgnoreCase(nomeItemRecebido)) {
+                itemRecebido = item;
+                break;
+            }
+        }
+
+        if (itemRecebido == null) {
+            System.out.println("Item não encontrado.");
+            return;
+        }
+
+        PropostaDeTroca proposta = new PropostaDeTroca(jogadorLogado, jogadorRecebe, itemProposto, itemRecebido);
+        jogadorRecebe.addPropostaRecebida(proposta);
+
+        System.out.println("Proposta de troca enviada.");
+    }
+
+    private static void checarPropostasRecebidas(Scanner scanner) {
+        if (jogadorLogado == null) {
+            System.out.println("Nenhum jogador está logado no momento.");
+            return;
+        }
+
+        if (jogadorLogado.getPropostasRecebidas().isEmpty()) {
+            System.out.println("Você não tem propostas de troca no momento.");
+            return;
+        }
+
+        System.out.println("Propostas recebidas:");
+        int index = 1;
+        for (PropostaDeTroca proposta : jogadorLogado.getPropostasRecebidas()) {
+            System.out.println(index + ": " + proposta);
+            index++;
+        }
+
+        System.out.println("Digite o número da proposta que deseja aceitar ou recusar, ou 0 para voltar:");
+        int escolha = scanner.nextInt();
+        scanner.nextLine();
+
+        if (escolha > 0 && escolha <= jogadorLogado.getPropostasRecebidas().size()) {
+            PropostaDeTroca proposta = jogadorLogado.getPropostasRecebidas().get(escolha - 1);
+            System.out.println("Digite 1 para aceitar ou 2 para recusar:");
+            int decisao = scanner.nextInt();
+            scanner.nextLine();
+
+            if (decisao == 1) {
+                proposta.aceitar();
+                System.out.println("Você aceitou a proposta.");
+                realizarTroca(proposta);
+            } else {
+                proposta.recusar();
+                System.out.println("Você recusou a proposta.");
+            }
+        }
+    }
+
+    private static void realizarTroca(PropostaDeTroca proposta) {
+        if (proposta.isAceita()) {
+            proposta.getJogadorPropoe().getItens().remove(proposta.getItemProposto());
+            proposta.getJogadorRecebe().getItens().remove(proposta.getItemRecebido());
+
+            proposta.getJogadorPropoe().addItem(proposta.getItemRecebido());
+            proposta.getJogadorRecebe().addItem(proposta.getItemProposto());
+
+            System.out.println("Troca realizada com sucesso!");
+        } else {
+            System.out.println("A troca não foi aceita.");
+        }
+    }
+
+
     private static void preencherDados(){
-        Jogador jogador1 = new Jogador("jogador1@gmail.com","Cristiano Ronaldo","111222");
-        jogador1.addItem(new Item("Espada da Lua Sombria","Espada Grande","Arma",700.0));
-        jogador1.addItem(new Item("Cajado Pedrilhante", "Cajado Mágico","Arma Projétil",300.0));
+        Jogador jogador1 = new Jogador("jogador1@gmail.com", "Cristiano Ronaldo", "111222");
+        jogador1.addItem(new Item("Espada da Lua Sombria", "Espada Grande", "Arma", 700.0));
+        jogador1.addItem(new Item("Cajado Pedrilhante", "Cajado Mágico", "Arma Projétil", 300.0));
         jogadores.add(jogador1);
 
-        Jogador jogador2 = new Jogador("jogador2@gmail.com","Lionel Messi","333444");
-        jogador2.addItem(new Item("Lâmina Blasfêmica", "Espada de Fogo","Arma",800.0));
-        jogador2.addItem(new Item("Poção de Vida","Poção para curar vida","Consumível",75.0));
+        Jogador jogador2 = new Jogador("jogador2@gmail.com", "Lionel Messi", "333444");
+        jogador2.addItem(new Item("Lâmina Blasfêmica", "Espada de Fogo", "Arma", 800.0));
+        jogador2.addItem(new Item("Poção de Vida", "Poção para curar vida", "Consumível", 75.0));
         jogadores.add(jogador2);
 
-        Jogador jogador3 = new Jogador("jogador3@gmail.com","Kylian Mbappé","444555");
-        jogador3.addItem(new Item("Nagakiba","Katana Grande", "Arma", 500.0));
-        jogador3.addItem(new Item("Poção de Escudo","Poção para curar escudo","Consumível",75.0));
+        Jogador jogador3 = new Jogador("jogador3@gmail.com", "Kylian Mbappé", "444555");
+        jogador3.addItem(new Item("Nagakiba", "Katana Grande", "Arma", 500.0));
+        jogador3.addItem(new Item("Poção de Escudo", "Poção para curar escudo", "Consumível", 75.0));
         jogadores.add(jogador3);
-
     }
 
 }

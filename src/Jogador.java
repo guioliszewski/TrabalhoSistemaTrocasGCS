@@ -5,12 +5,14 @@ public class Jogador {
     private String nomeCompleto;
     private String pin;
     private ArrayList<Item> itens;
+    private ArrayList<PropostaDeTroca> propostasRecebidas = new ArrayList<>();
 
     public Jogador(String email, String nomeCompleto, String pin){
         this.email = email;
         this.nomeCompleto = nomeCompleto;
         this.pin = pin;
         this.itens = new ArrayList<>();
+
     }
 
     public String getEmail() {
@@ -50,6 +52,14 @@ public class Jogador {
             System.out.println(item);
         }
 
+    }
+
+    public ArrayList<PropostaDeTroca> getPropostasRecebidas() {
+        return propostasRecebidas;
+    }
+
+    public void addPropostaRecebida(PropostaDeTroca proposta) {
+        propostasRecebidas.add(proposta);
     }
 
 }
