@@ -43,15 +43,16 @@ public class PropostaDeTroca {
 	}
 
 	public void aceitar() {
-		this.aceita = false;
+		this.aceita = true;
 	}
 	
 	public void recusar() {
 		this.aceita = false;
 	}
 	
+	@Override
 	public String toString() {
-		return "Proposta: " + this.getNome() + " propõe a troca do item " + this.getItemProposto() + " pelo item " + this.getItemRecebido() + " do jogador " +this.getJogadorRecebe();
+		return "Proposta: " + getJogadorPropoe().getNome() + " propõe a troca do item " + this.getItemProposto() + " pelo item " + this.getItemRecebido() + " do jogador " +this.getJogadorRecebe();
 	}
 }
 
