@@ -14,6 +14,10 @@ public class Item {
         this.id = countID++;
     }
 
+    public double getValor() {
+        return valor;
+    }
+
     public String getNome() {
         return nome;
     }
