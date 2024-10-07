@@ -15,6 +15,7 @@ public class SIstemaDeTrocaItens {
             System.out.println("1: Cadastrar um novo Jogador");
             System.out.println("2: Fazer Login");
             System.out.println("3: Listar Itens do Jogador Logado");
+            System.out.println("5: Listar Itens de Jogadores por Preço");
             opcao = scanner.nextInt();
             scanner.nextLine();
 
