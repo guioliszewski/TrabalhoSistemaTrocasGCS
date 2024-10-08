@@ -24,10 +24,10 @@ public class Item {
 
     @Override
     public String toString() {
-        return "ID: " + id +
-                "Nome: " + nome +
-                "Descricao: " + descricao +
-                "Tipo: " + tipo +
-                "Valor: R$ " + valor;
+        return "ID: " + id + "/n"
+                "Nome: " + nome + "/n"
+                "Descricao: " + descricao + "/n"
+                "Tipo: " + tipo + "/n"
+                "Valor: R$ " + valor; "/n"
     }
 }
