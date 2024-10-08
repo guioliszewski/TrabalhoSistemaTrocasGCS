@@ -8,6 +8,7 @@ public class PropostaDeTroca {
 	private Item itemRecebido;
 	private LocalDateTime dataHora;
 	private boolean aceita;
+	private boolean recusada;
 
 	public PropostaDeTroca (Jogador jogadorPropoe, Jogador jogadorRecebe, Item itemProposto, Item itemRecebido) {
 		this.jogadorPropoe = jogadorPropoe;
@@ -21,9 +22,13 @@ public class PropostaDeTroca {
 	public String getStatus(){
 		if(aceita){
 			return "aceita";
-		} else if(!aceita && LocalDateTime.now().isAfter(dataHora)){
+		}	
+ 
+		else if(recusada){
 			return "recusada";
-		} else {
+		} 
+ 
+		else {
 			return "aguardando";
 		}
 	}
