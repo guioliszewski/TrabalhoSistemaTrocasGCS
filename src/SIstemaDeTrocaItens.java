@@ -19,6 +19,9 @@ public class SIstemaDeTrocaItens {
             System.out.println("5: Listar Itens de Jogadores por Preço");
             System.out.println("6: Criar proposta de troca");
             System.out.println("7: Checar propostas recebidas");
+            System.out.println("9: Adicionar item aos favoritos");
+            System.out.println("10: Remover item dos favoritos");
+            System.out.println("11: Listar itens favoritos");
             
             opcao = scanner.nextInt();
             scanner.nextLine();
@@ -47,6 +50,15 @@ public class SIstemaDeTrocaItens {
                     break;
                 case 7:
                     checarPropostasRecebidas(scanner);
+                    break;
+                case 9:
+                    adicionarItemFavorito(scanner);
+                    break;
+                case 10:
+                    removerItemFavorito(scanner);
+                    break;
+                case 11:
+                    listarItensFavoritos();
                     break;
                 default:
                     System.out.println("Opção inválida.");
@@ -255,6 +267,81 @@ public class SIstemaDeTrocaItens {
         } else {
             System.out.println("A troca não foi aceita.");
         }
+    }
+
+    private static void adicionarItemFavorito(Scanner scanner) {
+        if (jogadorLogado == null) {
+            System.out.println("Nenhum jogador está logado no momento.");
+            return;
+        }
+
+        System.out.println("Digite o nome do jogador dono do item:");
+        String nomeJogador = scanner.nextLine();
+        Jogador jogadorDono = null;
+
+        for (Jogador jogador : jogadores) {
+            if (jogador.getNome().equalsIgnoreCase(nomeJogador)) {
+                jogadorDono = jogador;
+                break;
+            }
+        }
+
+        if (jogadorDono == null) {
+            System.out.println("Jogador não encontrado.");
+            return;
+        }
+
+        System.out.println("Digite o nome do item:");
+        String nomeItem = scanner.nextLine();
+        Item itemFavorito = null;
+
+        for (Item item : jogadorDono.getItens()) {
+            if (item.getNome().equalsIgnoreCase(nomeItem)) {
+                itemFavorito = item;
+                break;
+            }
+        }
+
+        if (itemFavorito == null) {
+            System.out.println("Item não encontrado.");
+            return;
+        }
+
+        jogadorLogado.addFavorito(itemFavorito);
+    }
+
+    private static void removerItemFavorito(Scanner scanner) {
+        if (jogadorLogado == null) {
+            System.out.println("Nenhum jogador está logado no momento.");
+            return;
+        }
+
+        System.out.println("Digite o nome do item:");
+        String nomeItem = scanner.nextLine();
+        Item itemFavorito = null;
+
+        for (Item item : jogadorLogado.getFavoritos()) {
+            if (item.getNome().equalsIgnoreCase(nomeItem)) {
+                itemFavorito = item;
+                break;
+            }
+        }
+
+        if (itemFavorito == null) {
+            System.out.println("Item não encontrado nos favoritos.");
+            return;
+        }
+
+        jogadorLogado.removerFavorito(itemFavorito);
+    }
+
+    private static void listarItensFavoritos() {
+        if (jogadorLogado == null) {
+            System.out.println("Nenhum jogador está logado no momento.");
+            return;
+        }
+
+        jogadorLogado.listarFavoritos();
     }
 
 

@@ -5,6 +5,7 @@ public class Jogador {
     private String nomeCompleto;
     private String pin;
     private ArrayList<Item> itens;
+    private ArrayList<Item> favoritos = new ArrayList<>();
     private ArrayList<PropostaDeTroca> propostasRecebidas = new ArrayList<>();
 
     public Jogador(String email, String nomeCompleto, String pin){
@@ -62,4 +63,31 @@ public class Jogador {
         propostasRecebidas.add(proposta);
     }
 
+    public ArrayList<Item> getFavoritos() {
+        return favoritos;
+    }
+
+    public void addFavorito(Item item) {
+        if (!favoritos.contains(item)) {
+            favoritos.add(item);
+            System.out.println("Item adicionado aos favoritos.");
+        } else {
+            System.out.println("Item já está nos favoritos.");
+        }
+    }
+
+    public void removerFavorito(Item item) {
+        if (favoritos.remove(item)) {
+            System.out.println("Item removido dos favoritos.");
+        } else {
+            System.out.println("Item não encontrado nos favoritos.");
+        }
+    }
+
+    public void listarFavoritos() {
+        System.out.println("Itens favoritos do jogador " + nomeCompleto + ":");
+        for (Item item : favoritos) {
+            System.out.println(item);
+        }
+}
 }
