@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SIstemaDeTrocaItens {
 
     private static Jogador jogadorLogado = null;
     private static ArrayList<Jogador> jogadores = new ArrayList<>();
+    private static Item itens;
 
     public static void main(String args[]){
         Scanner scanner = new Scanner(System.in);
@@ -19,6 +21,7 @@ public class SIstemaDeTrocaItens {
             System.out.println("5: Listar Itens de Jogadores por Preço");
             System.out.println("6: Criar proposta de troca");
             System.out.println("7: Checar propostas recebidas");
+            System.out.println("8: Exibe as Estatísticas Gerais");
             System.out.println("9: Adicionar item aos favoritos");
             System.out.println("10: Remover item dos favoritos");
             System.out.println("11: Listar itens favoritos");
@@ -50,6 +53,9 @@ public class SIstemaDeTrocaItens {
                     break;
                 case 7:
                     checarPropostasRecebidas(scanner);
+                    break;
+                case 8:
+                    exibirEstatisticasGerais();                
                     break;
                 case 9:
                     adicionarItemFavorito(scanner);
@@ -253,6 +259,46 @@ public class SIstemaDeTrocaItens {
                 System.out.println("Você recusou a proposta.");
             }
         }
+    }
+
+    public static void exibirEstatisticasGerais() {
+        int totalUsuarios = jogadores.size();
+        int totalItens = 0;
+        double somaPrecoItens = 0.0;
+        int propostasAceitas = 0;
+        int propostasDeclinadas = 0;
+        int propostasAguardando = 0;
+    
+        for (Jogador jogador : jogadores) {
+            // Total de itens e soma dos preços
+            List<Item> itens = jogador.getItens(); // Corrigi para 'jogador'
+            totalItens += itens.size();
+            for (Item item : itens) {
+                somaPrecoItens += item.getValor();
+            }
+    
+            // Contagem de propostas
+            List<PropostaDeTroca> propostas = jogador.getPropostasRecebidas(); // Assumindo que as propostas são acessadas assim
+            for (PropostaDeTroca proposta : propostas) {
+                // Verificar status da proposta
+                String status = proposta.getStatus();
+                if (status.equals("aguardando")) {
+                    propostasAguardando++;
+                } else if (status.equals("aceita")) {
+                    propostasAceitas++;
+                } else if (status.equals("recusada")) {
+                    propostasDeclinadas++;
+                }
+            }
+        }
+    
+    
+        System.out.println("Estatísticas Gerais do Sistema:");
+        System.out.println("Total de usuários: " + totalUsuarios);
+        System.out.println("Total de itens: " + totalItens + " (Soma total dos preços: R$ " + somaPrecoItens + ")");
+        System.out.println("Propostas aceitas: " + propostasAceitas);
+        System.out.println("Propostas declinadas: " + propostasDeclinadas);
+        System.out.println("Propostas aguardando resposta: " + propostasAguardando);
     }
 
     private static void realizarTroca(PropostaDeTroca proposta) {
