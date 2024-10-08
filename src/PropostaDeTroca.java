@@ -17,6 +17,16 @@ public class PropostaDeTroca {
 		this.dataHora = LocalDateTime.now();
 		this.aceita = false;
 	}
+
+	public String getStatus(){
+		if(aceita){
+			return "aceita";
+		} else if(!aceita && LocalDateTime.now().isAfter(dataHora)){
+			return "recusada";
+		} else {
+			return "aguardando";
+		}
+	}
 	
 	public Jogador getJogadorPropoe() {
 		return jogadorPropoe;
