@@ -260,7 +260,6 @@ public class SIstemaDeTrocaItens {
             }
         }
     }
-
     public static void exibirEstatisticasGerais() {
         int totalUsuarios = jogadores.size();
         int totalItens = 0;
@@ -270,17 +269,13 @@ public class SIstemaDeTrocaItens {
         int propostasAguardando = 0;
     
         for (Jogador jogador : jogadores) {
-            // Total de itens e soma dos preços
-            List<Item> itens = jogador.getItens(); // Corrigi para 'jogador'
+            List<Item> itens = jogador.getItens();
             totalItens += itens.size();
             for (Item item : itens) {
                 somaPrecoItens += item.getValor();
             }
-    
-            // Contagem de propostas
-            List<PropostaDeTroca> propostas = jogador.getPropostasRecebidas(); // Assumindo que as propostas são acessadas assim
-            for (PropostaDeTroca proposta : propostas) {
-                // Verificar status da proposta
+            List<PropostaDeTroca> propostas = jogador.getPropostasRecebidas();
+            for (PropostaDeTroca proposta : propostas) {  
                 String status = proposta.getStatus();
                 if (status.equals("aguardando")) {
                     propostasAguardando++;
@@ -291,8 +286,6 @@ public class SIstemaDeTrocaItens {
                 }
             }
         }
-    
-    
         System.out.println("Estatísticas Gerais do Sistema:");
         System.out.println("Total de usuários: " + totalUsuarios);
         System.out.println("Total de itens: " + totalItens + " (Soma total dos preços: R$ " + somaPrecoItens + ")");
@@ -300,7 +293,6 @@ public class SIstemaDeTrocaItens {
         System.out.println("Propostas declinadas: " + propostasDeclinadas);
         System.out.println("Propostas aguardando resposta: " + propostasAguardando);
     }
-
     private static void realizarTroca(PropostaDeTroca proposta) {
         if (proposta.isAceita()) {
             proposta.getJogadorPropoe().getItens().remove(proposta.getItemProposto());
