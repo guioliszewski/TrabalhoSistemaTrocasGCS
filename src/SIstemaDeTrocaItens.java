@@ -1,3 +1,4 @@
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +9,7 @@ public class SIstemaDeTrocaItens {
     private static ArrayList<Jogador> jogadores = new ArrayList<>();
 
     public static void main(String args[]) {
+
         Scanner scanner = new Scanner(System.in);
         preencherDados();
         int opcao = -1;
@@ -242,6 +244,8 @@ public class SIstemaDeTrocaItens {
         PropostaDeTroca proposta = new PropostaDeTroca(jogadorLogado, jogadorRecebe, itemProposto, itemRecebido);
         jogadorRecebe.addPropostaRecebida(proposta);
 
+        EnviarEmail.enviarEmail(jogadorLogado, jogadorRecebe, itemProposto, itemRecebido);
+
         System.out.println("Proposta de troca enviada.");
     }
 
@@ -413,7 +417,7 @@ public class SIstemaDeTrocaItens {
         jogador1.addItem(new Item("Cajado Pedrilhante", "Cajado Mágico", "Arma Projétil", 300.0));
         jogadores.add(jogador1);
 
-        Jogador jogador2 = new Jogador("jogador2@gmail.com", "Lionel Messi", "333444");
+        Jogador jogador2 = new Jogador("larissaaalves1211@gmail.com", "Larissa", "333444");
         jogador2.addItem(new Item("Lâmina Blasfêmica", "Espada de Fogo", "Arma", 800.0));
         jogador2.addItem(new Item("Poção de Vida", "Poção para curar vida", "Consumível", 75.0));
         jogadores.add(jogador2);
