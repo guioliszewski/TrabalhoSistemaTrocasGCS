@@ -21,7 +21,6 @@ public class EnviarEmail {
         });
 
         try {
-
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress("gcsnotificacaosistema@gmail.com"));
             message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(destinatario));
