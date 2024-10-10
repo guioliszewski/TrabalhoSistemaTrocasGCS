@@ -77,7 +77,7 @@ public class Jogador {
         if (favoritos.remove(item)) {
             System.out.println("Item removido dos favoritos.");
         } else {
-            System.out.println("Item não encontrado nos favoritos.");
+            System.out.println("ERRO: Item não encontrado nos favoritos.");
         }
     }
 

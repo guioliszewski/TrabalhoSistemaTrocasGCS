@@ -28,8 +28,6 @@ public class SIstemaDeTrocaItens {
             System.out.println("12: Listar itens favoritos");
             System.out.println("======================================");
 
-
-
             opcao = scanner.nextInt();
             scanner.nextLine();
 
@@ -74,7 +72,7 @@ public class SIstemaDeTrocaItens {
                     listarItensFavoritos();
                     break;
                 default:
-                    System.out.println("Opção inválida.");
+                    System.out.println("ERRO: Opção inválida.");
                     break;
             }
         }
@@ -82,7 +80,7 @@ public class SIstemaDeTrocaItens {
 
     private static void pesquisaItem(Scanner scanner) {
         if (jogadorLogado == null) {
-            System.out.println("Nenhum jogador está logado no momento.");
+            System.out.println("ERRO: Nenhum jogador está logado no momento.");
             return;
         }
 
@@ -100,13 +98,13 @@ public class SIstemaDeTrocaItens {
         }
 
         if (!itemEncontrado) {
-            System.out.println("Nenhum item encontrado com as informações fornecidas.");
+            System.out.println("ERRO: Nenhum item encontrado com as informações fornecidas.");
         }
     }
 
     private static void listarItensOutrosJogadoresPorPreco() {
         if (jogadorLogado == null) {
-            System.out.println("Nenhum jogador está logado no momento.");
+            System.out.println("ERRO: Nenhum jogador está logado no momento.");
             return;
         }
 
@@ -133,7 +131,7 @@ public class SIstemaDeTrocaItens {
         String pin = scanner.nextLine();
 
         if (pin.length() != 6) {
-            System.out.println("ERRO. O PIN deve possuir 6 dígitos");
+            System.out.println("ERRO: O PIN deve possuir 6 dígitos");
             return;
         }
         Jogador novoJogador = new Jogador(email, nome, pin);
@@ -154,12 +152,12 @@ public class SIstemaDeTrocaItens {
                 return;
             }
         }
-        System.out.println("O Email ou PIN digitados estão incorretos.");
+        System.out.println("ERRO: O Email ou PIN digitados estão incorretos.");
     }
 
     private static void listarItensJogadorLogado() {
         if (jogadorLogado == null) {
-            System.out.println("Nenhum jogador está logado no momento.");
+            System.out.println("ERRO: Nenhum jogador está logado no momento.");
             return;
         }
         jogadorLogado.listarItensOrdenados();
@@ -167,7 +165,7 @@ public class SIstemaDeTrocaItens {
 
     private static void criarPropostaDeTroca(Scanner scanner) {
         if (jogadorLogado == null) {
-            System.out.println("Nenhum jogador está logado no momento.");
+            System.out.println("ERRO: Nenhum jogador está logado no momento.");
             return;
         }
 
@@ -183,7 +181,7 @@ public class SIstemaDeTrocaItens {
         }
 
         if (jogadorRecebe == null) {
-            System.out.println("Jogador não encontrado.");
+            System.out.println("ERRO: Jogador não encontrado.");
             return;
         }
 
@@ -201,7 +199,7 @@ public class SIstemaDeTrocaItens {
         }
 
         if (itemProposto == null) {
-            System.out.println("Item não encontrado.");
+            System.out.println("ERRO: Item não encontrado.");
             return;
         }
 
@@ -221,7 +219,7 @@ public class SIstemaDeTrocaItens {
         }
 
         if (itemRecebido == null) {
-            System.out.println("Item não encontrado.");
+            System.out.println("ERRO: Item não encontrado.");
             return;
         }
 
@@ -233,12 +231,12 @@ public class SIstemaDeTrocaItens {
 
     private static void checarPropostasRecebidas(Scanner scanner) {
         if (jogadorLogado == null) {
-            System.out.println("Nenhum jogador está logado no momento.");
+            System.out.println("ERRO: Nenhum jogador está logado no momento.");
             return;
         }
 
         if (jogadorLogado.getPropostasRecebidas().isEmpty()) {
-            System.out.println("Você não tem propostas de troca no momento.");
+            System.out.println("ERRO: Você não tem propostas de troca no momento.");
             return;
         }
 
@@ -287,11 +285,11 @@ public class SIstemaDeTrocaItens {
             List<PropostaDeTroca> propostas = jogador.getPropostasRecebidas();
             for (PropostaDeTroca proposta : propostas) {
                 String status = proposta.getStatus();
-                if (status.equals("aguardando")) {
+                if (status.equals("Aguardando")) {
                     propostasAguardando++;
-                } else if (status.equals("aceita")) {
+                } else if (status.equals("Aceita")) {
                     propostasAceitas++;
-                } else if (status.equals("recusada")) {
+                } else if (status.equals("Recusada")) {
                     propostasDeclinadas++;
                 }
             }
@@ -320,7 +318,7 @@ public class SIstemaDeTrocaItens {
 
     private static void adicionarItemFavorito(Scanner scanner) {
         if (jogadorLogado == null) {
-            System.out.println("Nenhum jogador está logado no momento.");
+            System.out.println("ERRO: Nenhum jogador está logado no momento.");
             return;
         }
 
@@ -336,7 +334,7 @@ public class SIstemaDeTrocaItens {
         }
 
         if (jogadorDono == null) {
-            System.out.println("Jogador não encontrado.");
+            System.out.println("ERRO: Jogador não encontrado.");
             return;
         }
 
@@ -352,7 +350,7 @@ public class SIstemaDeTrocaItens {
         }
 
         if (itemFavorito == null) {
-            System.out.println("Item não encontrado.");
+            System.out.println("ERRO: Item não encontrado.");
             return;
         }
 
@@ -361,7 +359,7 @@ public class SIstemaDeTrocaItens {
 
     private static void removerItemFavorito(Scanner scanner) {
         if (jogadorLogado == null) {
-            System.out.println("Nenhum jogador está logado no momento.");
+            System.out.println("ERRO: Nenhum jogador está logado no momento.");
             return;
         }
 
@@ -377,7 +375,7 @@ public class SIstemaDeTrocaItens {
         }
 
         if (itemFavorito == null) {
-            System.out.println("Item não encontrado nos favoritos.");
+            System.out.println("ERRO: Item não encontrado nos favoritos.");
             return;
         }
 
@@ -386,7 +384,7 @@ public class SIstemaDeTrocaItens {
 
     private static void listarItensFavoritos() {
         if (jogadorLogado == null) {
-            System.out.println("Nenhum jogador está logado no momento.");
+            System.out.println("ERRO: Nenhum jogador está logado no momento.");
             return;
         }
 
@@ -412,7 +410,7 @@ public class SIstemaDeTrocaItens {
 
     private static void removerItemJogadorLogado(Scanner scanner){
         if (jogadorLogado == null) {
-            System.out.println("Nenhum jogador está logado no momento.");
+            System.out.println("ERRO: Nenhum jogador está logado no momento.");
             return;
         }
 
@@ -430,7 +428,7 @@ public class SIstemaDeTrocaItens {
         }
         
         if (itemARemover == null) {
-            System.out.println("Item não encontrado.");
+            System.out.println("ERRO: Item não encontrado.");
             return;
         }
 

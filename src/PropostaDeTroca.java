@@ -21,15 +21,15 @@ public class PropostaDeTroca {
 
 	public String getStatus(){
 		if(aceita){
-			return "aceita";
+			return "Aceita";
 		}	
  
 		else if(recusada){
-			return "recusada";
+			return "Recusada";
 		} 
  
 		else {
-			return "aguardando";
+			return "Aguardando";
 		}
 	}
 	
