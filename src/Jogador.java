@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Jogador {
     private String email;
@@ -8,7 +10,7 @@ public class Jogador {
     private ArrayList<Item> favoritos = new ArrayList<>();
     private ArrayList<PropostaDeTroca> propostasRecebidas = new ArrayList<>();
 
-    public Jogador(String email, String nomeCompleto, String pin){
+    public Jogador(String email, String nomeCompleto, String pin) {
         this.email = email;
         this.nomeCompleto = nomeCompleto;
         this.pin = pin;
@@ -24,31 +26,26 @@ public class Jogador {
         return pin;
     }
 
-    public String getNome(){
+    public String getNome() {
         return nomeCompleto;
     }
 
     public ArrayList<Item> getItens() {
         return itens;
     }
-    public void addItem(Item item){
+
+    public void addItem(Item item) {
         itens.add(item);
     }
-    public void removerItem(Item item){
+
+    public void removerItem(Item item) {
         itens.remove(item);
     }
-    public void listarItensOrdenados(){
-        for(int i = 0;i<itens.size();i++){
-            for(int j = 0;j< itens.size();j++){
-                if(itens.get(j).getNome().compareTo(itens.get(j+1).getNome())>0){
-                    Item aux = itens.get(j);
-                    itens.set(j,itens.get(j+1));
-                    itens.set(j+1,aux);
-                }
-            }
-        }
+
+    public void listarItensOrdenados() {
+        Collections.sort(itens, new ComparadorItemPreco());
         System.out.println("Itens do jogador " + nomeCompleto + ":");
-        for(int i=0;i< itens.size();i++){
+        for (int i = 0; i < itens.size(); i++) {
             Item item = itens.get(i);
             System.out.println(item);
         }
@@ -89,5 +86,5 @@ public class Jogador {
         for (Item item : favoritos) {
             System.out.println(item);
         }
-}
+    }
 }
