@@ -30,6 +30,10 @@ public class Item {
         return tipo;
     }
 
+    public int getID() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "ID: " + id + "\n" +

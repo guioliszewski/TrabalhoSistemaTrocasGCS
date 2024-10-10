@@ -418,12 +418,12 @@ public class SIstemaDeTrocaItens {
 
         System.out.println("Escolha um item para remover:");
         listarItensJogadorLogado();
-        System.out.println("Digite o nome do item:");
-        String nomeItemARemover = scanner.nextLine();
+        System.out.println("Digite o ID do item:");
+        int idItemARemover = scanner.nextInt();
         Item itemARemover = null;
 
         for (Item item : jogadorLogado.getItens()) {
-            if (item.getNome().trim().equalsIgnoreCase(nomeItemARemover)) {
+            if (item.getID() == (idItemARemover)) {
                 itemARemover = item;
                 break;
             }
