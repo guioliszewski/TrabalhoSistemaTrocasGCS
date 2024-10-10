@@ -6,14 +6,13 @@ public class Item {
     private double valor;
     private static int countID = 1;
 
-    public Item(String nome, String descricao, String tipo, double valor){
+    public Item(String nome, String descricao, String tipo, double valor) {
         this.nome = nome;
         this.descricao = descricao;
         this.tipo = tipo;
         this.valor = valor;
         this.id = countID++;
     }
-
 
     public double getValor() {
         return valor;
@@ -23,16 +22,21 @@ public class Item {
         return nome;
     }
 
-    public String getDescricao(){return descricao;}
+    public String getDescricao() {
+        return descricao;
+    }
 
-    public String getTipo(){return tipo;}
+    public String getTipo() {
+        return tipo;
+    }
 
     @Override
     public String toString() {
-        return "ID: " + id + "/n"
-                "Nome: " + nome + "/n"
-                "Descricao: " + descricao + "/n"
-                "Tipo: " + tipo + "/n"
-                "Valor: R$ " + valor; "/n"
+        return "ID: " + id + "\n" +
+                "Nome: " + nome + "\n" +
+                "Descricao: " + descricao + "\n" +
+                "Tipo: " + tipo + "\n" +
+                "Valor: R$ " + valor + "\n";
     }
+
 }
