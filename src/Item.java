@@ -25,6 +25,8 @@ public class Item {
 
     public String getDescricao(){return descricao;}
 
+    public String getTipo(){return tipo;}
+
     @Override
     public String toString() {
         return "ID: " + id + "/n"
