@@ -43,6 +43,10 @@ public class Jogador {
     }
 
     public void listarItensOrdenados() {
+        if (itens.isEmpty()) {
+            System.out.println("ERRO: Nenhum item encontrado para o jogador informado.");
+            return;
+        }
         Collections.sort(itens, new ComparadorItemPreco());
         System.out.println("Itens do jogador " + nomeCompleto + ":");
         for (int i = 0; i < itens.size(); i++) {
