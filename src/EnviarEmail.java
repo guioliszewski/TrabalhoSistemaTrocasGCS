@@ -11,7 +11,7 @@ public class EnviarEmail {
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", "true");
+        props.put("mail.debug", "false");
 
         Session session = Session.getInstance(props, new Authenticator() {
             @Override
@@ -30,7 +30,6 @@ public class EnviarEmail {
             message.setSentDate(new Date());
 
             Transport.send(message);
-            System.out.println("Email enviado com sucesso!");
         } catch (MessagingException e) {
             e.printStackTrace();
             System.out.println("Ocorreu erro ao enviar e-mail");
