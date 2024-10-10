@@ -1,3 +1,4 @@
+import javax.mail.MessagingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +9,7 @@ public class SIstemaDeTrocaItens {
     private static ArrayList<Jogador> jogadores = new ArrayList<>();
 
     public static void main(String args[]) {
+
         Scanner scanner = new Scanner(System.in);
         preencherDados();
         int opcao = -1;
@@ -18,15 +20,14 @@ public class SIstemaDeTrocaItens {
             System.out.println("2: Fazer Login");
             System.out.println("3: Listar Itens do Jogador Logado");
             System.out.println("4: Pesquisar Item");
-            System.out.println("5: Remover Item do Jogador");
-            System.out.println("6: Listar Itens de Jogadores por Preço");
+            System.out.println("5: Listar Itens de Jogadores por Preço");
+            System.out.println("6: Cadastrar item");
             System.out.println("7: Criar proposta de troca");
             System.out.println("8: Checar propostas recebidas");
             System.out.println("9: Exibe as Estatísticas Gerais");
             System.out.println("10: Adicionar item aos favoritos");
             System.out.println("11: Remover item dos favoritos");
             System.out.println("12: Listar itens favoritos");
-            System.out.println("======================================");
 
             opcao = scanner.nextInt();
             scanner.nextLine();
@@ -48,10 +49,10 @@ public class SIstemaDeTrocaItens {
                     pesquisaItem(scanner);
                     break;
                 case 5:
-                    removerItemJogadorLogado(scanner);
+                    listarItensOutrosJogadoresPorPreco();
                     break;
                 case 6:
-                    listarItensOutrosJogadoresPorPreco();
+                    cadastrarItem(scanner);
                     break;
                 case 7:
                     criarPropostaDeTroca(scanner);
@@ -76,6 +77,24 @@ public class SIstemaDeTrocaItens {
                     break;
             }
         }
+    }
+
+    private static void cadastrarItem(Scanner scanner) {
+        if (jogadorLogado == null) {
+            System.out.println("Nenhum jogador está logado no momento");
+            return;
+        }
+        Item novoItem = new Item(null, null, null, 0);
+        System.out.println("Insira o nome do item");
+        novoItem.setNome(scanner.nextLine());
+        System.out.println("Insira uma descrição");
+        novoItem.setDescricao(scanner.nextLine());
+        System.out.println("Insira o tipo do item");
+        novoItem.setTipo(scanner.nextLine());
+        System.out.println("Insira o valor do item");
+        novoItem.setValor(scanner.nextDouble());
+        jogadorLogado.addItem(novoItem);
+        System.out.println("=======Item Cadastrado!=======");
     }
 
     private static void pesquisaItem(Scanner scanner) {
@@ -225,6 +244,8 @@ public class SIstemaDeTrocaItens {
 
         PropostaDeTroca proposta = new PropostaDeTroca(jogadorLogado, jogadorRecebe, itemProposto, itemRecebido);
         jogadorRecebe.addPropostaRecebida(proposta);
+
+        EnviarEmail.enviarEmail(jogadorLogado, jogadorRecebe, itemProposto, itemRecebido);
 
         System.out.println("Proposta de troca enviada.");
     }
@@ -397,7 +418,7 @@ public class SIstemaDeTrocaItens {
         jogador1.addItem(new Item("Cajado Pedrilhante", "Cajado Mágico", "Arma Projétil", 300.0));
         jogadores.add(jogador1);
 
-        Jogador jogador2 = new Jogador("jogador2@gmail.com", "Lionel Messi", "333444");
+        Jogador jogador2 = new Jogador("larissaaalves1211@gmail.com", "Larissa", "333444");
         jogador2.addItem(new Item("Lâmina Blasfêmica", "Espada de Fogo", "Arma", 800.0));
         jogador2.addItem(new Item("Poção de Vida", "Poção para curar vida", "Consumível", 75.0));
         jogadores.add(jogador2);
