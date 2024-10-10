@@ -18,12 +18,13 @@ public class SIstemaDeTrocaItens {
             System.out.println("3: Listar Itens do Jogador Logado");
             System.out.println("4: Pesquisar Item");
             System.out.println("5: Listar Itens de Jogadores por Preço");
-            System.out.println("6: Criar proposta de troca");
-            System.out.println("7: Checar propostas recebidas");
-            System.out.println("8: Exibe as Estatísticas Gerais");
-            System.out.println("9: Adicionar item aos favoritos");
-            System.out.println("10: Remover item dos favoritos");
-            System.out.println("11: Listar itens favoritos");
+            System.out.println("6: Cadastrar item");
+            System.out.println("7: Criar proposta de troca");
+            System.out.println("8: Checar propostas recebidas");
+            System.out.println("9: Exibe as Estatísticas Gerais");
+            System.out.println("10: Adicionar item aos favoritos");
+            System.out.println("11: Remover item dos favoritos");
+            System.out.println("12: Listar itens favoritos");
 
             opcao = scanner.nextInt();
             scanner.nextLine();
@@ -48,21 +49,24 @@ public class SIstemaDeTrocaItens {
                     listarItensOutrosJogadoresPorPreco();
                     break;
                 case 6:
-                    criarPropostaDeTroca(scanner);
+                    cadastrarItem(scanner);
                     break;
                 case 7:
-                    checarPropostasRecebidas(scanner);
+                    criarPropostaDeTroca(scanner);
                     break;
                 case 8:
-                    exibirEstatisticasGerais();
+                    checarPropostasRecebidas(scanner);
                     break;
                 case 9:
-                    adicionarItemFavorito(scanner);
+                    exibirEstatisticasGerais();
                     break;
                 case 10:
-                    removerItemFavorito(scanner);
+                    adicionarItemFavorito(scanner);
                     break;
                 case 11:
+                    removerItemFavorito(scanner);
+                    break;
+                case 12:
                     listarItensFavoritos();
                     break;
                 default:
@@ -70,6 +74,24 @@ public class SIstemaDeTrocaItens {
                     break;
             }
         }
+    }
+
+    private static void cadastrarItem(Scanner scanner) {
+        if (jogadorLogado == null) {
+            System.out.println("Nenhum jogador está logado no momento");
+            return;
+        }
+        Item novoItem = new Item(null, null, null, 0);
+        System.out.println("Insira o nome do item");
+        novoItem.setNome(scanner.nextLine());
+        System.out.println("Insira uma descrição");
+        novoItem.setDescricao(scanner.nextLine());
+        System.out.println("Insira o tipo do item");
+        novoItem.setTipo(scanner.nextLine());
+        System.out.println("Insira o valor do item");
+        novoItem.setValor(scanner.nextDouble());
+        jogadorLogado.addItem(novoItem);
+        System.out.println("=======Item Cadastrado!=======");
     }
 
     private static void pesquisaItem(Scanner scanner) {

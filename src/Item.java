@@ -30,6 +30,22 @@ public class Item {
         return tipo;
     }
 
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public String toString() {
         return "ID: " + id + "\n" +
