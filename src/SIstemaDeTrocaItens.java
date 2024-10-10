@@ -6,13 +6,12 @@ public class SIstemaDeTrocaItens {
 
     private static Jogador jogadorLogado = null;
     private static ArrayList<Jogador> jogadores = new ArrayList<>();
-    private static Item itens;
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
         Scanner scanner = new Scanner(System.in);
         preencherDados();
         int opcao = -1;
-        while(opcao != 0){
+        while (opcao != 0) {
             System.out.println("0: Sair do programa");
             System.out.println("1: Cadastrar um novo Jogador");
             System.out.println("2: Fazer Login");
@@ -25,11 +24,11 @@ public class SIstemaDeTrocaItens {
             System.out.println("9: Adicionar item aos favoritos");
             System.out.println("10: Remover item dos favoritos");
             System.out.println("11: Listar itens favoritos");
-            
+
             opcao = scanner.nextInt();
             scanner.nextLine();
 
-            switch (opcao){
+            switch (opcao) {
                 case 0:
                     System.out.println("Finalizando o programa...");
                     return;
@@ -55,7 +54,7 @@ public class SIstemaDeTrocaItens {
                     checarPropostasRecebidas(scanner);
                     break;
                 case 8:
-                    exibirEstatisticasGerais();                
+                    exibirEstatisticasGerais();
                     break;
                 case 9:
                     adicionarItemFavorito(scanner);
@@ -73,18 +72,20 @@ public class SIstemaDeTrocaItens {
         }
     }
 
-    private static void pesquisaItem(Scanner scanner){
+    private static void pesquisaItem(Scanner scanner) {
         if (jogadorLogado == null) {
             System.out.println("Nenhum jogador está logado no momento.");
             return;
         }
 
         System.out.println("Insira parte do nome, descrição ou o tipo do item: ");
-        String termoBusca = scanner.nextLine().tolowerCase();
-        
+        String termoBusca = scanner.nextLine().toLowerCase();
+
         boolean itemEncontrado = false;
         for (Item item : jogadorLogado.getItens()) {
-            if (item.getNome().toLowerCase().contains(termoBusca) || item.getDescricao().toLowerCase().contais(termoBusca) || item.getTipo().toLowerCase().contains(termoBusca)){
+            if (item.getNome().toLowerCase().contains(termoBusca)
+                    || item.getDescricao().toLowerCase().contains(termoBusca)
+                    || item.getTipo().toLowerCase().contains(termoBusca)) {
                 System.out.println("Item encontrado: " + item);
                 itemEncontrado = true;
             }
@@ -115,7 +116,7 @@ public class SIstemaDeTrocaItens {
         }
     }
 
-    private static void cadastrarJogador(Scanner scanner){
+    private static void cadastrarJogador(Scanner scanner) {
         System.out.println("Email: ");
         String email = scanner.nextLine();
         System.out.println("Nome completo do jogador: ");
@@ -123,7 +124,7 @@ public class SIstemaDeTrocaItens {
         System.out.println("Digite o PIN (6 dígitos):");
         String pin = scanner.nextLine();
 
-        if(pin.length() != 6){
+        if (pin.length() != 6) {
             System.out.println("ERRO. O PIN deve possuir 6 dígitos");
             return;
         }
@@ -132,14 +133,14 @@ public class SIstemaDeTrocaItens {
         System.out.println("O jogador foi cadastrado com sucesso!");
     }
 
-    private static void login(Scanner scanner){
+    private static void login(Scanner scanner) {
         System.out.println("Digite seu email: ");
         String email = scanner.nextLine();
         System.out.println("Digite seu PIN: ");
         String pin = scanner.nextLine();
 
-        for(Jogador j : jogadores){
-            if(j.getEmail().equals(email) && j.getPin().equals(pin)){
+        for (Jogador j : jogadores) {
+            if (j.getEmail().equals(email) && j.getPin().equals(pin)) {
                 jogadorLogado = j;
                 System.out.println("O Login foi realizado com sucesso!");
                 return;
@@ -148,8 +149,8 @@ public class SIstemaDeTrocaItens {
         System.out.println("O Email ou PIN digitados estão incorretos.");
     }
 
-    private static void listarItensJogadorLogado(){
-        if(jogadorLogado == null){
+    private static void listarItensJogadorLogado() {
+        if (jogadorLogado == null) {
             System.out.println("Nenhum jogador está logado no momento.");
             return;
         }
@@ -260,6 +261,7 @@ public class SIstemaDeTrocaItens {
             }
         }
     }
+
     public static void exibirEstatisticasGerais() {
         int totalUsuarios = jogadores.size();
         int totalItens = 0;
@@ -267,7 +269,7 @@ public class SIstemaDeTrocaItens {
         int propostasAceitas = 0;
         int propostasDeclinadas = 0;
         int propostasAguardando = 0;
-    
+
         for (Jogador jogador : jogadores) {
             List<Item> itens = jogador.getItens();
             totalItens += itens.size();
@@ -275,7 +277,7 @@ public class SIstemaDeTrocaItens {
                 somaPrecoItens += item.getValor();
             }
             List<PropostaDeTroca> propostas = jogador.getPropostasRecebidas();
-            for (PropostaDeTroca proposta : propostas) {  
+            for (PropostaDeTroca proposta : propostas) {
                 String status = proposta.getStatus();
                 if (status.equals("aguardando")) {
                     propostasAguardando++;
@@ -293,6 +295,7 @@ public class SIstemaDeTrocaItens {
         System.out.println("Propostas declinadas: " + propostasDeclinadas);
         System.out.println("Propostas aguardando resposta: " + propostasAguardando);
     }
+
     private static void realizarTroca(PropostaDeTroca proposta) {
         if (proposta.isAceita()) {
             proposta.getJogadorPropoe().getItens().remove(proposta.getItemProposto());
@@ -382,8 +385,7 @@ public class SIstemaDeTrocaItens {
         jogadorLogado.listarFavoritos();
     }
 
-
-    private static void preencherDados(){
+    private static void preencherDados() {
         Jogador jogador1 = new Jogador("jogador1@gmail.com", "Cristiano Ronaldo", "111222");
         jogador1.addItem(new Item("Espada da Lua Sombria", "Espada Grande", "Arma", 700.0));
         jogador1.addItem(new Item("Cajado Pedrilhante", "Cajado Mágico", "Arma Projétil", 300.0));
