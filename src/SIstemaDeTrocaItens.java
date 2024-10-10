@@ -221,15 +221,9 @@ public class SIstemaDeTrocaItens {
 
         PropostaDeTroca proposta = new PropostaDeTroca(jogadorLogado, jogadorRecebe, itemProposto, itemRecebido);
         jogadorRecebe.addPropostaRecebida(proposta);
-        try {
-            String assunto = "Você recebeu uma proposta de troca de " + jogadorLogado.getNome();
-            String destinatario = jogadorRecebe.getEmail();
-            String mensagem = " O jogador " + jogadorLogado.getNome() +
-                " deseja trocar " + itemProposto.getNome() + " por " + itemRecebido.getNome();
-            EnviarEmail.enviarEmail(assunto, destinatario, mensagem);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
+
+        EnviarEmail.enviarEmail(jogadorLogado, jogadorRecebe, itemProposto, itemRecebido);
+
         System.out.println("Proposta de troca enviada.");
     }
 

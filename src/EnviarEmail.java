@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Properties;
 
 public class EnviarEmail {
-    public static void enviarEmail(String assunto, String destinatario, String email) throws MessagingException {
+    public static void enviarEmail(Jogador jogadorLogado, Jogador jogadorRecebe, Item itemProposto, Item itemRecebido) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
@@ -20,13 +20,19 @@ public class EnviarEmail {
             }
         });
 
+        String assunto = "Você recebeu uma proposta de troca de " + jogadorLogado.getNome();
+        String destinatario = jogadorRecebe.getEmail();
+        String mensagem = " O jogador " + jogadorLogado.getNome() +
+                " deseja trocar " + itemProposto.getNome() + " por " + itemRecebido.getNome();
+
+
         try {
 
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress("gcsnotificacaosistema@gmail.com"));
             message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(destinatario));
             message.setSubject(assunto);
-            message.setText(email, "UTF-8");
+            message.setText(mensagem, "UTF-8");
             message.setSentDate(new Date());
 
             Transport.send(message);
