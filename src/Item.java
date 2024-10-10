@@ -14,6 +14,7 @@ public class Item {
         this.id = countID++;
     }
 
+
     public double getValor() {
         return valor;
     }
@@ -21,6 +22,8 @@ public class Item {
     public String getNome() {
         return nome;
     }
+
+    public String getDescricao(){return descricao;}
 
     @Override
     public String toString() {
