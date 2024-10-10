@@ -79,19 +79,19 @@ public class SIstemaDeTrocaItens {
             return;
         }
 
-        System.out.println("Insira o nome do item: ");
-        String nome = scanner.nextLine();
+        System.out.println("Insira parte do nome, descrição ou o tipo do item: ");
+        String termoBusca = scanner.nextLine().tolowerCase();
         
         boolean itemEncontrado = false;
         for (Item item : jogadorLogado.getItens()) {
-            if (item.getNome().equalsIgnoreCase(nome)) {
+            if (item.getNome().toLowerCase().contains(termoBusca) || item.getDescricao().toLowerCase().contais(termoBusca) || item.getTipo().toLowerCase().contains(termoBusca)){
                 System.out.println("Item encontrado: " + item);
                 itemEncontrado = true;
             }
         }
 
         if (!itemEncontrado) {
-            System.out.println("Item não encontrado.");
+            System.out.println("Nenhum item encontrado com as informações fornecidas.");
         }
     }
 
