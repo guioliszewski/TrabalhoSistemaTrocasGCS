@@ -27,7 +27,7 @@ public class SIstemaDeTrocaItens {
             System.out.println("10: Adicionar item aos favoritos");
             System.out.println("11: Remover item dos favoritos");
             System.out.println("12: Listar itens favoritos");
-
+            System.out.println("13: Finalizar sessão");
             opcao = scanner.nextInt();
             scanner.nextLine();
 
@@ -71,10 +71,22 @@ public class SIstemaDeTrocaItens {
                 case 12:
                     listarItensFavoritos();
                     break;
+                case 13:
+                    finalizarSessao();
+                    break;
                 default:
                     System.out.println("Opção inválida.");
                     break;
             }
+        }
+    }
+
+    private static void finalizarSessao() {
+        if (jogadorLogado == null) {
+            System.out.println("Você já está deslogado");
+        } else {
+            jogadorLogado = null;
+            System.out.println("Sessão Finalizada");
         }
     }
 
@@ -158,19 +170,23 @@ public class SIstemaDeTrocaItens {
     }
 
     private static void login(Scanner scanner) {
-        System.out.println("Digite seu email: ");
-        String email = scanner.nextLine();
-        System.out.println("Digite seu PIN: ");
-        String pin = scanner.nextLine();
+        if (jogadorLogado != null) {
+            System.out.println("Você já está logado");
+        } else {
+            System.out.println("Digite seu email: ");
+            String email = scanner.nextLine();
+            System.out.println("Digite seu PIN: ");
+            String pin = scanner.nextLine();
 
-        for (Jogador j : jogadores) {
-            if (j.getEmail().equals(email) && j.getPin().equals(pin)) {
-                jogadorLogado = j;
-                System.out.println("O Login foi realizado com sucesso!");
-                return;
+            for (Jogador j : jogadores) {
+                if (j.getEmail().equals(email) && j.getPin().equals(pin)) {
+                    jogadorLogado = j;
+                    System.out.println("O Login foi realizado com sucesso!");
+                    return;
+                }
             }
+            System.out.println("O Email ou PIN digitados estão incorretos.");
         }
-        System.out.println("O Email ou PIN digitados estão incorretos.");
     }
 
     private static void listarItensJogadorLogado() {
@@ -205,12 +221,12 @@ public class SIstemaDeTrocaItens {
 
         System.out.println("Escolha um item seu para oferecer na troca:");
         listarItensJogadorLogado();
-        System.out.println("Digite o nome do item:");
-        String nomeItemProposto = scanner.nextLine();
+        System.out.println("Digite o ID do item:");
+        int itemPropostoId = scanner.nextInt();
         Item itemProposto = null;
 
         for (Item item : jogadorLogado.getItens()) {
-            if (item.getNome().equalsIgnoreCase(nomeItemProposto)) {
+            if (item.getId() == itemPropostoId) {
                 itemProposto = item;
                 break;
             }
@@ -225,12 +241,12 @@ public class SIstemaDeTrocaItens {
         for (Item item : jogadorRecebe.getItens()) {
             System.out.println(item);
         }
-        System.out.println("Digite o nome do item:");
-        String nomeItemRecebido = scanner.nextLine();
+        System.out.println("Digite o ID do item:");
+        int itemRecebidoId = scanner.nextInt();
         Item itemRecebido = null;
 
         for (Item item : jogadorRecebe.getItens()) {
-            if (item.getNome().equalsIgnoreCase(nomeItemRecebido)) {
+            if (item.getId() == itemRecebidoId) {
                 itemRecebido = item;
                 break;
             }

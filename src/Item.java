@@ -30,6 +30,10 @@ public class Item {
         return tipo;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setValor(double valor) {
         this.valor = valor;
     }
