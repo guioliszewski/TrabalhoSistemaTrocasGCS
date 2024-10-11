@@ -30,6 +30,10 @@ public class Item {
         return tipo;
     }
 
+    public int getID() {
+        return id;
+    }
+
     public void setValor(double valor) {
         this.valor = valor;
     }
@@ -50,7 +54,7 @@ public class Item {
     public String toString() {
         return "ID: " + id + "\n" +
                 "Nome: " + nome + "\n" +
-                "Descricao: " + descricao + "\n" +
+                "Descrição: " + descricao + "\n" +
                 "Tipo: " + tipo + "\n" +
                 "Valor: R$ " + valor + "\n";
     }

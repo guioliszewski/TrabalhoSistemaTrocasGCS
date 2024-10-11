@@ -43,6 +43,10 @@ public class Jogador {
     }
 
     public void listarItensOrdenados() {
+        if (itens.isEmpty()) {
+            System.out.println("ERRO: Nenhum item encontrado para o jogador informado.");
+            return;
+        }
         Collections.sort(itens, new ComparadorItemPreco());
         System.out.println("Itens do jogador " + nomeCompleto + ":");
         for (int i = 0; i < itens.size(); i++) {
@@ -67,17 +71,17 @@ public class Jogador {
     public void addFavorito(Item item) {
         if (!favoritos.contains(item)) {
             favoritos.add(item);
-            System.out.println("Item adicionado aos favoritos.");
+            System.out.println("Item adicionado aos favoritos."+"\n");
         } else {
-            System.out.println("Item já está nos favoritos.");
+            System.out.println("Item já está nos favoritos."+"\n");
         }
     }
 
     public void removerFavorito(Item item) {
         if (favoritos.remove(item)) {
-            System.out.println("Item removido dos favoritos.");
+            System.out.println("Item removido dos favoritos."+"\n");
         } else {
-            System.out.println("Item não encontrado nos favoritos.");
+            System.out.println("ERRO: Item não encontrado nos favoritos."+"\n");
         }
     }
 
