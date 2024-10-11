@@ -100,7 +100,7 @@ public class SIstemaDeTrocaItens {
         System.out.println("Insira o valor do item");
         novoItem.setValor(scanner.nextDouble());
         jogadorLogado.addItem(novoItem);
-        System.out.println("=======Item Cadastrado!=======");
+        System.out.println("====== Item Cadastrado! ======");
     }
 
     private static void pesquisaItem(Scanner scanner) {
@@ -133,20 +133,31 @@ public class SIstemaDeTrocaItens {
             return;
         }
 
+        boolean achouItens = false;
+
         for (Jogador jogador : jogadores) {
             if (!jogador.equals(jogadorLogado)) {
                 ArrayList<Item> itens = jogador.getItens();
 
-                itens.sort((item1, item2) -> Double.compare(item1.getValor(), item2.getValor()));
+                if (itens.isEmpty()) {
+                    continue;
+                }
 
-                System.out.println("Itens do jogador " + jogador.getNome() + " ordenados por preço:");
+                itens.sort(new ComparadorItemPreco());
+
+                System.out.println("====== Itens do jogador " + jogador.getNome() + " ordenados por preço: ======");
                 for (Item item : itens) {
                     System.out.println(item);
                 }
+
+                achouItens = true;
             }
         }
+        if (!achouItens) {
+            System.out.println("ERRO: Nenhum item encontrado com outros jogadores.");
+        }
     }
-
+    
     private static void cadastrarJogador(Scanner scanner) {
         System.out.println("Email: ");
         String email = scanner.nextLine();
@@ -424,7 +435,7 @@ public class SIstemaDeTrocaItens {
         jogador1.addItem(new Item("Cajado Pedrilhante", "Cajado Mágico", "Arma Projétil", 300.0));
         jogadores.add(jogador1);
 
-        Jogador jogador2 = new Jogador("larissaaalves1211@gmail.com", "Larissa", "333444");
+        Jogador jogador2 = new Jogador("jogador2@gmail.com", "Lionel Messi", "333444");
         jogador2.addItem(new Item("Lâmina Blasfêmica", "Espada de Fogo", "Arma", 800.0));
         jogador2.addItem(new Item("Poção de Vida", "Poção para curar vida", "Consumível", 75.0));
         jogadores.add(jogador2);
