@@ -438,13 +438,13 @@ public class SIstemaDeTrocaItens {
         jogadores.add(jogador1);
 
         Jogador jogador2 = new Jogador("jogador2@gmail.com", "Lionel Messi", "333444");
-        jogador2.addItem(new Item("Lâmina Blasfêmica", "Espada de Fogo", "Arma", 800.0));
-        jogador2.addItem(new Item("Poção de Vida", "Poção para curar vida", "Consumível", 75.0));
+        jogador2.addItem(new Item("Foice Maligna", "Foice venenosa", "Arma", 800.0));
+        jogador2.addItem(new Item("Elixir de Vida", "Poção para curar vida", "Consumível", 75.0));
         jogadores.add(jogador2);
 
-        Jogador jogador3 = new Jogador("jogador3@gmail.com", "Kylian Mbappé", "555666");
+        Jogador jogador3 = new Jogador("jogador3@gmail.com", "Kylian Mbappe", "555666");
         jogador3.addItem(new Item("Nagakiba", "Katana Grande", "Arma", 500.0));
-        jogador3.addItem(new Item("Poção de Escudo", "Poção para curar escudo", "Consumível", 75.0));
+        jogador3.addItem(new Item("Elixir de Escudo", "Poção para curar escudo", "Consumível", 75.0));
         jogadores.add(jogador3);
     }
 
