@@ -67,7 +67,7 @@ public class PropostaDeTroca {
 	
 	@Override
 	public String toString() {
-		return "Proposta: " + getJogadorPropoe().getNome() + " propõe a troca do item " + this.getItemProposto() + " pelo item " + this.getItemRecebido() + " do jogador " +this.getJogadorRecebe();
+		return "Proposta: " + getJogadorPropoe().getNome() + " propõe a troca do item abaixo" + "\n" + this.getItemProposto() + "Pelo item abaixo" + "\n" + this.getItemRecebido() + "Do jogador " +this.getJogadorRecebe()+"\n";
 	}
 }
 

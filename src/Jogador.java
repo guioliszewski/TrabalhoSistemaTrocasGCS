@@ -71,17 +71,17 @@ public class Jogador {
     public void addFavorito(Item item) {
         if (!favoritos.contains(item)) {
             favoritos.add(item);
-            System.out.println("Item adicionado aos favoritos.");
+            System.out.println("Item adicionado aos favoritos."+"\n");
         } else {
-            System.out.println("Item já está nos favoritos.");
+            System.out.println("Item já está nos favoritos."+"\n");
         }
     }
 
     public void removerFavorito(Item item) {
         if (favoritos.remove(item)) {
-            System.out.println("Item removido dos favoritos.");
+            System.out.println("Item removido dos favoritos."+"\n");
         } else {
-            System.out.println("ERRO: Item não encontrado nos favoritos.");
+            System.out.println("ERRO: Item não encontrado nos favoritos."+"\n");
         }
     }
 
