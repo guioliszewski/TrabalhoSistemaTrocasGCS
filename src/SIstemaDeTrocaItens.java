@@ -91,13 +91,13 @@ public class SIstemaDeTrocaItens {
             return;
         }
         Item novoItem = new Item(null, null, null, 0);
-        System.out.println("Insira o nome do item");
+        System.out.println("Insira o nome do item:");
         novoItem.setNome(scanner.nextLine());
-        System.out.println("Insira uma descrição");
+        System.out.println("Insira uma descrição:");
         novoItem.setDescricao(scanner.nextLine());
-        System.out.println("Insira o tipo do item");
+        System.out.println("Insira o tipo do item:");
         novoItem.setTipo(scanner.nextLine());
-        System.out.println("Insira o valor do item");
+        System.out.println("Insira o valor do item:");
         novoItem.setValor(scanner.nextDouble());
         jogadorLogado.addItem(novoItem);
         System.out.println("====== Item Cadastrado! ======");
@@ -223,12 +223,12 @@ public class SIstemaDeTrocaItens {
 
         System.out.println("Escolha um item seu para oferecer na troca:");
         listarItensJogadorLogado();
-        System.out.println("Digite o nome do item:");
-        String nomeItemProposto = scanner.nextLine();
+        System.out.println("Digite o ID do item:");
+        int idItemProposto = scanner.nextInt();
         Item itemProposto = null;
 
         for (Item item : jogadorLogado.getItens()) {
-            if (item.getNome().equalsIgnoreCase(nomeItemProposto)) {
+            if (item.getID() == (idItemProposto)) {
                 itemProposto = item;
                 break;
             }
@@ -243,12 +243,12 @@ public class SIstemaDeTrocaItens {
         for (Item item : jogadorRecebe.getItens()) {
             System.out.println(item);
         }
-        System.out.println("Digite o nome do item:");
-        String nomeItemRecebido = scanner.nextLine();
+        System.out.println("Digite o ID do item:");
+        int idItemRecebido = scanner.nextInt();
         Item itemRecebido = null;
 
         for (Item item : jogadorRecebe.getItens()) {
-            if (item.getNome().equalsIgnoreCase(nomeItemRecebido)) {
+            if (item.getID() == (idItemRecebido)) {
                 itemRecebido = item;
                 break;
             }
@@ -258,6 +258,8 @@ public class SIstemaDeTrocaItens {
             System.out.println("ERRO: Item não encontrado.");
             return;
         }
+
+        System.out.println("Aguarde um momento...");
 
         PropostaDeTroca proposta = new PropostaDeTroca(jogadorLogado, jogadorRecebe, itemProposto, itemRecebido);
         jogadorRecebe.addPropostaRecebida(proposta);
@@ -278,7 +280,7 @@ public class SIstemaDeTrocaItens {
             return;
         }
 
-        System.out.println("Propostas recebidas:");
+        System.out.println("====== Propostas recebidas: ======");
         int index = 1;
         for (PropostaDeTroca proposta : jogadorLogado.getPropostasRecebidas()) {
             System.out.println(index + ": " + proposta);
@@ -332,7 +334,7 @@ public class SIstemaDeTrocaItens {
                 }
             }
         }
-        System.out.println("Estatísticas Gerais do Sistema:");
+        System.out.println("====== Estatísticas Gerais do Sistema: ======");
         System.out.println("Total de usuários: " + totalUsuarios);
         System.out.println("Total de itens: " + totalItens + " (Soma total dos preços: R$ " + somaPrecoItens + ")");
         System.out.println("Propostas aceitas: " + propostasAceitas);
@@ -440,7 +442,7 @@ public class SIstemaDeTrocaItens {
         jogador2.addItem(new Item("Poção de Vida", "Poção para curar vida", "Consumível", 75.0));
         jogadores.add(jogador2);
 
-        Jogador jogador3 = new Jogador("jogador3@gmail.com", "Kylian Mbappé", "444555");
+        Jogador jogador3 = new Jogador("jogador3@gmail.com", "Kylian Mbappé", "555666");
         jogador3.addItem(new Item("Nagakiba", "Katana Grande", "Arma", 500.0));
         jogador3.addItem(new Item("Poção de Escudo", "Poção para curar escudo", "Consumível", 75.0));
         jogadores.add(jogador3);
