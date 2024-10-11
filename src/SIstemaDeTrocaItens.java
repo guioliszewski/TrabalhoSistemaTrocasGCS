@@ -20,14 +20,17 @@ public class SIstemaDeTrocaItens {
             System.out.println("2: Fazer Login");
             System.out.println("3: Listar Itens do Jogador Logado");
             System.out.println("4: Pesquisar Item");
-            System.out.println("5: Listar Itens de Jogadores por Preço");
-            System.out.println("6: Cadastrar item");
-            System.out.println("7: Criar proposta de troca");
-            System.out.println("8: Checar propostas recebidas");
-            System.out.println("9: Exibe as Estatísticas Gerais");
-            System.out.println("10: Adicionar item aos favoritos");
-            System.out.println("11: Remover item dos favoritos");
-            System.out.println("12: Listar itens favoritos");
+            System.out.println("5: Remover Item do Jogador Logado");
+            System.out.println("6: Listar Itens de Jogadores por Preço");
+            System.out.println("7: Cadastrar item");
+            System.out.println("8: Criar proposta de troca");
+            System.out.println("9: Checar propostas recebidas");
+            System.out.println("10: Exibe as Estatísticas Gerais");
+            System.out.println("11: Adicionar item aos favoritos");
+            System.out.println("12: Remover item dos favoritos");
+            System.out.println("13: Listar itens favoritos");
+            System.out.println("======================================");
+
 
             opcao = scanner.nextInt();
             scanner.nextLine();
@@ -49,27 +52,30 @@ public class SIstemaDeTrocaItens {
                     pesquisaItem(scanner);
                     break;
                 case 5:
-                    listarItensOutrosJogadoresPorPreco();
+                    removerItemJogadorLogado(scanner);
                     break;
                 case 6:
-                    cadastrarItem(scanner);
+                    listarItensOutrosJogadoresPorPreco();
                     break;
                 case 7:
-                    criarPropostaDeTroca(scanner);
+                    cadastrarItem(scanner);
                     break;
                 case 8:
-                    checarPropostasRecebidas(scanner);
+                    criarPropostaDeTroca(scanner);
                     break;
                 case 9:
-                    exibirEstatisticasGerais();
+                    checarPropostasRecebidas(scanner);
                     break;
                 case 10:
-                    adicionarItemFavorito(scanner);
+                    exibirEstatisticasGerais();
                     break;
                 case 11:
-                    removerItemFavorito(scanner);
+                    adicionarItemFavorito(scanner);
                     break;
                 case 12:
+                    removerItemFavorito(scanner);
+                    break;
+                case 13:
                     listarItensFavoritos();
                     break;
                 default:
@@ -436,10 +442,13 @@ public class SIstemaDeTrocaItens {
         }
 
         System.out.println("Escolha um item para remover:");
-        listarItensJogadorLogado();
+        jogadorLogado.listarItensOrdenados();
+        if (jogadorLogado.getItens().isEmpty()) {
+            return; }        
         System.out.println("Digite o ID do item:");
         int idItemARemover = scanner.nextInt();
         Item itemARemover = null;
+
 
         for (Item item : jogadorLogado.getItens()) {
             if (item.getID() == (idItemARemover)) {
@@ -447,14 +456,15 @@ public class SIstemaDeTrocaItens {
                 break;
             }
         }
-        
-        if (itemARemover == null) {
-            System.out.println("ERRO: Item não encontrado.");
-            return;
-        }
 
         jogadorLogado.removerItem(itemARemover);
         System.out.println("Item removido com sucesso.");
+
+        if (itemARemover == null) {
+            System.out.println("ERRO: Item não encontrado.");;
+        }
+
+        return;
     }
 
 }
